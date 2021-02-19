@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>BTN/Play</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="admin/components/sidebar-collapsed" transform="translate(-24.000000, -647.000000)">
+            <g id="BTN/Play" transform="translate(24.113235, 647.764879)">
+                <circle id="Oval" fill="#0602FF" cx="12" cy="12" r="12"></circle>
+                <path d="M8.07357816,9.03345635 L13.3033153,7.45382205 C14.3607029,7.13443968 15.4767956,7.73271118 15.796178,8.79009885 C15.910085,9.16721382 15.910085,9.56956974 15.796178,9.94668472 L14.2165436,15.1764218 C13.8971613,16.2338095 12.7810686,16.832081 11.723681,16.5126986 C11.4080576,16.4173651 11.1208983,16.2454804 10.8877603,16.0123425 L7.23765753,12.3622397 C6.45660895,11.5811911 6.45660895,10.3148611 7.23765753,9.53381253 C7.47079549,9.30067457 7.75795477,9.12878992 8.07357816,9.03345635 Z" id="Rectangle" fill="#FFFFFF" transform="translate(10.875000, 12.375000) rotate(-315.000000) translate(-10.875000, -12.375000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>admin/components/sidebar/navigation</title>
+    <g id="admin/components/sidebar/navigation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M19.5777088,7.15541753 L32,32 L32,32 L0,32 L12.4222912,7.15541753 C13.4102482,5.17950354 15.8129404,4.37860615 17.7888544,5.36656315 C18.562964,5.75361795 19.190654,6.38130792 19.5777088,7.15541753 Z" id="Triangle" fill="#FFFFFF" transform="translate(16.000000, 16.000000) rotate(-90.000000) translate(-16.000000, -16.000000) "></path>
+    </g>
+</svg>
