@@ -16,10 +16,21 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(ChatbotUser::class, function (Faker $faker) {
+    $os = ['Mac OS', 'Windows 95', 'Windows 97', 'Ubuntu'];
+    $browsers = ['IE 6', 'Netscape Navigator', 'AOL'];
     return [
         'user_id' => Str::random(20),
-        'first_name' => Str::random(10),
-        'last_name' => Str::random(10),
-        'email' => $faker->unique()->safeEmail,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'ip_address' => $faker->ipv4,
+        'os' => $os[array_rand($os)],
+        'country' => $faker->country,
+        'browser' => $browsers[array_rand($browsers)],
+        'timezone' => $faker->timezone,
+        'browser_language' => $faker->languageCode,
+        'platform' => 'webchat',
+        'email' => $faker->email,
+        'created_at' => $faker->dateTimeBetween('-30 days'),
+        'updated_at' => $faker->dateTimeBetween('-30 days'),
     ];
 });
