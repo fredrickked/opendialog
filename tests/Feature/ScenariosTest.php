@@ -6,12 +6,14 @@ namespace Tests\Feature;
 use App\Http\Facades\Serializer;
 use App\Http\Resources\ScenarioResource;
 use App\User;
-
+use OpenDialogAi\Core\Conversation\Condition;
+use OpenDialogAi\Core\Conversation\ConditionCollection;
 use OpenDialogAi\Core\Conversation\Conversation;
 use OpenDialogAi\Core\Conversation\Exceptions\ConversationObjectNotFoundException;
 use OpenDialogAi\Core\Conversation\Facades\ConversationDataClient;
 use OpenDialogAi\Core\Conversation\Scenario;
 use OpenDialogAi\Core\Conversation\ScenarioCollection;
+use OpenDialogAi\OperationEngine\Operations\EquivalenceOperation;
 use Tests\TestCase;
 
 class ScenariosTest extends TestCase
@@ -36,6 +38,15 @@ class ScenariosTest extends TestCase
         $fakeScenario1->setName("Example scenario");
         $fakeScenario1->setUid('0x0001');
         $fakeScenario1->setODId('example_scenario');
+        $fakeScenario1->setConditions(
+            new ConditionCollection(
+                new Condition(
+                EquivalenceOperation::getName(),
+                ['attribute' => 'user.age'],
+                ['value' => 18]
+            )
+            )
+        );
 
         $fakeScenario2 = new Scenario();
         $fakeScenario2->setName("Example scenario");
@@ -63,7 +74,13 @@ class ScenariosTest extends TestCase
             "createdAt": "2021-02-24T09:30:00.000Z",
             "defaultInterpreter": "interpreter.core.nlp",
             "behaviors": [],
-            "conditions": [],
+            "conditions": [
+                {
+                  "operation": "eq",
+                  "attributes": [{"attribute": "user.age"}],
+                  "parameters": [{"value": 18}]
+                }
+            ],
             "status": "PUBLISHED",
             "conversations": ["0x0002"]
         },
@@ -86,14 +103,21 @@ class ScenariosTest extends TestCase
             ->json('GET', '/admin/api/conversation-builder/scenarios')
             ->assertStatus(200)
             ->assertJson([[
-                "uid"=> "0x0001",
-                "odId"=> "example_scenario1",
-                "name"=> "Example scenario1",
+                "uid" => "0x0001",
+                "odId" => "example_scenario1",
+                "name" => "Example scenario1",
+                "conditions" => [
+                    [
+                        "operation" => "eq",
+                        "attributes" => [["attribute" => "user.age"]],
+                        "parameters" => [["value" => 18]]
+                    ]
+                  ],
                 ],
                 [
-                "uid"=> "0x0002",
-                "odId"=> "example_scenario2",
-                "name"=> "Example scenario2"
+                    "uid" => "0x0002",
+                    "odId" => "example_scenario2",
+                    "name" => "Example scenario2"
                 ]]);
     }
 
@@ -166,6 +190,15 @@ class ScenariosTest extends TestCase
         $fakeScenarioCreated->setUid("0x0001");
         $fakeScenarioCreated->setODId("example_scenario");
         $fakeScenarioCreated->setDescription('An example scenario');
+        $fakeScenarioCreated->setConditions(
+            new ConditionCollection(
+                new Condition(
+                EquivalenceOperation::getName(),
+                ['attribute' => 'user.age'],
+                ['value' => 18]
+            )
+            )
+        );
 
         $fakeConversation = new Conversation($fakeScenarioCreated);
         $fakeConversation->setName('Welcome Conversation');
@@ -187,6 +220,13 @@ class ScenariosTest extends TestCase
             "odId": "example_scenario",
             "name": "Example scenario",
             "description": "An example scenario",
+            "conditions": [
+                {
+                  "operation": "eq",
+                  "attributes": [{"attribute": "user.age"}],
+                  "parameters": [{"value": 18}]
+                }
+            ],
             "conversations": [{"id": "0x0001"}]
         }', true));
 
@@ -204,7 +244,14 @@ class ScenariosTest extends TestCase
             ->json('POST', '/admin/api/conversation-builder/scenarios/', [
                 'name' => 'Example scenario',
                 'odId' => 'example_scenario',
-                'description' =>  'An example scenario'
+                'description' =>  'An example scenario',
+                'conditions' => [
+                    [
+                        'operation' => 'eq',
+                        'attributes' => [['attribute' => 'user.age']],
+                        'parameters' => [['value' => 18]]
+                    ]
+                ]
             ])
             ->assertStatus(201)
             ->assertJson([
